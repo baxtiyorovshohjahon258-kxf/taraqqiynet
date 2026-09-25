@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kirish — TaraqqiyNET</title>
+<style>
+  :root{
+    --bg:#0b0e14; --bg2:#0f1420; --panel:#131826; --border:#222a3d;
+    --accent:#2ee6a8; --accent2:#4f8cff; --text:#e8ecf4; --muted:#7c869e;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:'Segoe UI',Consolas,monospace,Arial,sans-serif;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(46,230,168,.08), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(79,140,255,.10), transparent 40%),
+      var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  body::before{
+    content:''; position:absolute; inset:0; opacity:.5;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size:38px 38px;
+    pointer-events:none;
+  }
+  .brand{
+    position:absolute; top:32px; left:40px; font-weight:700; letter-spacing:1px;
+    color:var(--text); font-size:1rem; z-index:2;
+  }
+  .brand span{color:var(--accent);}
+  .code-float{
+    position:absolute; font-size:.78rem; color:var(--muted); opacity:.35;
+    font-family:Consolas,monospace; white-space:pre; line-height:1.5; user-select:none;
+  }
+  .code-float.c1{top:14%; left:6%;}
+  .code-float.c2{bottom:12%; right:7%; text-align:right;}
+  .wrap{
+    position:relative; z-index:2; width:100%; max-width:400px; padding:24px;
+  }
+  .card{
+    background:linear-gradient(180deg,var(--panel),var(--bg2));
+    border:1px solid var(--border); border-radius:14px; padding:40px 36px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+  }
+  .card h1{font-size:1.4rem; margin-bottom:4px;}
+  .card p.sub{color:var(--muted); font-size:.88rem; margin-bottom:26px;}
+  label{display:block; font-size:.82rem; color:var(--muted); margin-bottom:6px; margin-top:16px;}
+  input[type=text], input[type=password]{
+    width:100%; padding:12px 14px; border-radius:8px; border:1px solid var(--border);
+    background:#0c1019; color:var(--text); font-size:.95rem; outline:none;
+    transition:border-color .2s;
+  }
+  input:focus{border-color:var(--accent);}
+  .btn-main{
+    width:100%; margin-top:26px; padding:13px; border:none; border-radius:8px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#04140e;
+    font-weight:700; font-size:.98rem; cursor:pointer; letter-spacing:.3px;
+    transition:opacity .2s;
+  }
+  .btn-main:hover{opacity:.9;}
+  .errorlist{list-style:none; color:#ff6b6b; font-size:.85rem; margin-top:10px;}
+  .foot-links{margin-top:22px; text-align:center; font-size:.85rem; color:var(--muted);}
+  .foot-links a{color:var(--accent); text-decoration:none;}
+  .foot-links a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+  <div class="brand">TARAQQIY<span>NET</span></div>
+  <div class="code-float c1">def diagnostika(daraja):&#10;    return CEFR[daraja]&#10;&#10;&gt; running test_engine...</div>
+  <div class="code-float c2">region.stats()&#10;&gt; 14 hudud ulandi&#10;&gt; tahlil tayyor ✓</div>
+
+  <div class="wrap">
+    <div class="card">
+      <h1>Xush kelibsiz</h1>
+      <p class="sub">Davom etish uchun tizimga kiring</p>
+      <form method="post">
+        {% csrf_token %}
+        <label for="id_username">Login</label>
+        <input type="text" name="username" id="id_username" autofocus required>
+        <label for="id_password">Parol</label>
+        <input type="password" name="password" id="id_password" required>
+        {% if form.errors %}
+          <ul class="errorlist"><li>Login yoki parol noto'g'ri.</li></ul>
+        {% endif %}
+        <button type="submit" class="btn-main">Kirish</button>
+      </form>
+      <div class="foot-links">Hisobingiz yo'qmi? <a href="{% url 'register_choice' %}">Ro'yxatdan o'tish</a></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% load static %}<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}TaraqqiyNET{% endblock %}</title>
+<link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+<nav class="topbar">
+  <a href="{% url 'choose_dashboard' %}" class="brand">TARAQQIY<span>NET</span></a>
+  {% if user.is_authenticated %}
+  <div class="topbar-right">
+    <span class="user-chip">{{ user.username }} · {{ user.get_role_display }}</span>
+    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+  {% csrf_token %}
+  <button type="submit" class="btn-ghost-sm" style="font:inherit; cursor:pointer;">Chiqish</button>
+</form>
+  </div>
+  {% endif %}
+</nav>
+
+{% if messages %}
+<div class="messages">
+  {% for message in messages %}
+    <div class="msg msg-{{ message.tags }}">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

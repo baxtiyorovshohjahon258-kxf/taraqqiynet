@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Admin paneli — TaraqqiyNET{% endblock %}
+{% block content %}
+<h1>Hududlar bo'yicha tahlil</h1>
+<p class="lead">Barcha ma'lumot anonim va agregatlangan holda.</p>
+
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num">{{ totals.students }}</div><div class="stat-label">O'quvchilar</div></div>
+  <div class="stat-box"><div class="stat-num">{{ totals.centers }}</div><div class="stat-label">Markazlar</div></div>
+  <div class="stat-box"><div class="stat-num">{{ totals.regions }}</div><div class="stat-label">Hududlar</div></div>
+  <div class="stat-box"><div class="stat-num">{{ totals.attempts }}</div><div class="stat-label">Test urinishlari</div></div>
+</div>
+
+<h2>Hududlar bo'yicha o'rtacha natija (pastdan yuqoriga — yordam kerak bo'lgan hududlar)</h2>
+{% if region_stats %}
+<table>
+  <tr><th>Hudud</th><th>O'rtacha ball</th><th>Urinishlar soni</th></tr>
+  {% for r in region_stats %}
+  <tr>
+    <td>{{ r.region__name|default:"Noma'lum" }}</td>
+    <td>{{ r.avg_score|floatformat:1 }}%</td>
+    <td>{{ r.attempts }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="empty">Hozircha yakunlangan test urinishlari yo'q.</p>
+{% endif %}
+
+<h2>Fanlar bo'yicha o'rtacha natija</h2>
+{% if subject_stats %}
+<table>
+  <tr><th>Fan</th><th>O'rtacha ball</th><th>Urinishlar soni</th></tr>
+  {% for s in subject_stats %}
+  <tr><td>{{ s.subject__name }}</td><td>{{ s.avg_score|floatformat:1 }}%</td><td>{{ s.attempts }}</td></tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="empty">Ma'lumot yo'q.</p>
+{% endif %}
+{% endblock %}

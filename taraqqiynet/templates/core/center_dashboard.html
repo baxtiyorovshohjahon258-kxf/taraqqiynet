@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Markaz paneli — TaraqqiyNET{% endblock %}
+{% block content %}
+<h1>{{ center.name }}</h1>
+<p class="lead">{{ center.region.name }} hududidagi o'quvchilar natijalari</p>
+
+<h2>Darajalar bo'yicha taqsimot</h2>
+<div class="stats-row">
+  {% for s in stats %}
+  <div class="stat-box">
+    <div class="stat-num">{{ s.count }}</div>
+    <div class="stat-label">{{ s.result_level__name|default:"Aniqlanmagan" }}</div>
+  </div>
+  {% empty %}
+  <p class="empty">Hozircha ma'lumot yo'q.</p>
+  {% endfor %}
+</div>
+
+<h2>So'nggi urinishlar</h2>
+{% if attempts %}
+<table>
+  <tr><th>O'quvchi</th><th>Fan</th><th>Natija</th><th>Daraja</th><th>Sana</th></tr>
+  {% for a in attempts %}
+  <tr>
+    <td>{{ a.student.username }}</td>
+    <td>{{ a.subject.name }}</td>
+    <td>{{ a.score_percent }}%</td>
+    <td>{{ a.result_level.name|default:"—" }}</td>
+    <td>{{ a.finished_at|date:"d.m.Y H:i" }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="empty">Hozircha urinishlar yo'q.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bo'lim tanlash — TaraqqiyNET</title>
+<style>
+  :root{--bg:#0b0e14; --panel:#131826; --border:#222a3d; --accent:#2ee6a8; --accent2:#4f8cff; --text:#e8ecf4; --muted:#7c869e;}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',Arial,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px;}
+  h1{font-size:1.5rem; margin-bottom:6px;}
+  p.sub{color:var(--muted); margin-bottom:36px; text-align:center;}
+  .options{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:760px; width:100%;}
+  .opt{background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:30px 18px; text-align:center; text-decoration:none; color:var(--text); transition:border-color .2s, transform .2s;}
+  .opt.active:hover{border-color:var(--accent); transform:translateY(-3px);}
+  .opt.disabled{opacity:.35; cursor:not-allowed; pointer-events:none;}
+  .ic{font-size:2rem; margin-bottom:10px;}
+  h3{font-size:1rem; margin-bottom:6px;}
+  p.desc{font-size:.82rem; color:var(--muted);}
+  .tag{display:inline-block; margin-top:10px; font-size:.7rem; padding:3px 10px; border-radius:20px; background:rgba(46,230,168,.12); color:var(--accent);}
+  .logout{margin-top:32px; color:var(--muted); font-size:.85rem; text-decoration:none;}
+  .logout:hover{color:var(--accent);}
+  @media(max-width:640px){.options{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+  <h1>Xush kelibsiz, {{ request.user.username }}</h1>
+  <p class="sub">Qaysi bo'limga kirasiz?</p>
+  <div class="options">
+    <a class="opt {% if role == 'student' %}active{% else %}disabled{% endif %}" href="{% url 'student_dashboard' %}">
+      <div class="ic">🎓</div>
+      <h3>O'quvchi</h3>
+      <p class="desc">Test topshirish, natijalar</p>
+      {% if role == 'student' %}<div class="tag">Sizning bo'limingiz</div>{% endif %}
+    </a>
+    <a class="opt {% if role == 'center' %}active{% else %}disabled{% endif %}" href="{% url 'center_dashboard' %}">
+      <div class="ic">🏫</div>
+      <h3>Markaz</h3>
+      <p class="desc">O'quvchilar va statistikalar</p>
+      {% if role == 'center' %}<div class="tag">Sizning bo'limingiz</div>{% endif %}
+    </a>
+    <a class="opt {% if role == 'admin' %}active{% else %}disabled{% endif %}" href="{% url 'admin_dashboard' %}">
+      <div class="ic">📊</div>
+      <h3>Admin</h3>
+      <p class="desc">Hududlar bo'yicha tahlil</p>
+      {% if role == 'admin' %}<div class="tag">Sizning bo'limingiz</div>{% endif %}
+    </a>
+  </div>
+  <form method="post" action="{% url 'logout' %}">
+  {% csrf_token %}
+  <button type="submit" class="logout" style="background:none; border:none; font:inherit; cursor:pointer;">Chiqish</button>
+</form>
+</body>
+</html>

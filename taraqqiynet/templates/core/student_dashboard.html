@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}O'quvchi paneli — TaraqqiyNET{% endblock %}
+{% block content %}
+<h1>Diagnostika testi</h1>
+<p class="lead">Fan tanlang va bilim darajangizni aniqlang.</p>
+
+<div class="grid">
+  {% for subject in subjects %}
+  <div class="card">
+    <h3>{{ subject.name }}</h3>
+    <p>Test {{ subject.levels.count }} ta darajani aniqlaydi.</p>
+    <p style="margin-top:14px;">
+      <a class="btn" href="{% url 'start_test' subject.code %}">Testni boshlash</a>
+    </p>
+  </div>
+  {% empty %}
+  <p class="empty">Hozircha fanlar qo'shilmagan.</p>
+  {% endfor %}
+</div>
+
+<h2>Oldingi urinishlar</h2>
+{% if past_attempts %}
+<table>
+  <tr><th>Fan</th><th>Natija</th><th>Daraja</th><th>Sana</th></tr>
+  {% for a in past_attempts %}
+  <tr>
+    <td>{{ a.subject.name }}</td>
+    <td>{{ a.score_percent }}%</td>
+    <td>{{ a.result_level.name|default:"—" }}</td>
+    <td>{{ a.finished_at|date:"d.m.Y H:i" }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="empty">Hali test topshirmagansiz.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Natija — TaraqqiyNET{% endblock %}
+{% block content %}
+<h1>Test natijasi</h1>
+<p class="lead">{{ attempt.subject.name }} bo'yicha natijangiz:</p>
+
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num">{{ attempt.score_percent }}%</div><div class="stat-label">To'g'ri javoblar</div></div>
+  <div class="stat-box"><div class="level-pill">{{ attempt.result_level.name|default:"Aniqlanmadi" }}</div><div class="stat-label" style="margin-top:8px;">Sizning darajangiz</div></div>
+</div>
+
+<div class="progress-bar-wrap"><div class="progress-bar" style="width:{{ attempt.score_percent }}%;"></div></div>
+
+<h2>Hududingizdagi markazlar</h2>
+{% if centers %}
+<table>
+  <tr><th>Markaz</th><th>Manzil</th></tr>
+  {% for c in centers %}
+  <tr><td>{{ c.name }}</td><td>{{ c.address|default:"—" }}</td></tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="empty">Hududingizda hali ro'yxatdan o'tgan markaz yo'q.</p>
+{% endif %}
+
+<p style="margin-top:26px;"><a class="btn" href="{% url 'student_dashboard' %}">Panelga qaytish</a></p>
+{% endblock %}

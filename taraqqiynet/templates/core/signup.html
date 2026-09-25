@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ role_label }} sifatida ro'yxatdan o'tish — TaraqqiyNET</title>
+<style>
+  :root{--bg:#0b0e14; --panel:#131826; --bg2:#0f1420; --border:#222a3d; --accent:#2ee6a8; --accent2:#4f8cff; --text:#e8ecf4; --muted:#7c869e;}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',Arial,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:30px;}
+  .card{background:linear-gradient(180deg,var(--panel),var(--bg2)); border:1px solid var(--border); border-radius:14px; padding:36px; width:100%; max-width:440px;}
+  h1{font-size:1.3rem; margin-bottom:24px;}
+  label{display:block; font-size:.82rem; color:var(--muted); margin-bottom:6px; margin-top:14px;}
+  input, select{width:100%; padding:11px 13px; border-radius:8px; border:1px solid var(--border); background:#0c1019; color:var(--text); font-size:.92rem;}
+  .errorlist{list-style:none; color:#ff6b6b; font-size:.8rem; margin-top:4px;}
+  .helptext{font-size:.75rem; color:var(--muted); margin-top:4px;}
+  .btn-main{width:100%; margin-top:24px; padding:12px; border:none; border-radius:8px; background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#04140e; font-weight:700; font-size:.95rem; cursor:pointer;}
+  .foot-links{margin-top:18px; text-align:center; font-size:.85rem; color:var(--muted);}
+  .foot-links a{color:var(--accent); text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>{{ role_label }} sifatida ro'yxatdan o'tish</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.help_text %}<div class="helptext">{{ field.help_text }}</div>{% endif %}
+      {% if field.errors %}<ul class="errorlist">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+    {% endfor %}
+    <button type="submit" class="btn-main">Ro'yxatdan o'tish</button>
+  </form>
+  <div class="foot-links"><a href="{% url 'login' %}">&larr; Kirish sahifasiga qaytish</a></div>
+</div>
+</body>
+</html>

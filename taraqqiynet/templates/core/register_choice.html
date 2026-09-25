@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ro'yxatdan o'tish — TaraqqiyNET</title>
+<style>
+  :root{--bg:#0b0e14; --panel:#131826; --border:#222a3d; --accent:#2ee6a8; --accent2:#4f8cff; --text:#e8ecf4; --muted:#7c869e;}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Segoe UI',Arial,sans-serif; background:var(--bg); color:var(--text);
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+  }
+  .wrap{max-width:640px; width:100%; padding:24px; text-align:center;}
+  h1{font-size:1.6rem; margin-bottom:8px;}
+  p.sub{color:var(--muted); margin-bottom:34px;}
+  .options{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .opt{
+    background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:32px 20px;
+    text-decoration:none; color:var(--text); transition:border-color .2s, transform .2s;
+  }
+  .opt:hover{border-color:var(--accent); transform:translateY(-3px);}
+  .opt .ic{font-size:2rem; margin-bottom:10px;}
+  .opt h3{font-size:1.05rem; margin-bottom:6px;}
+  .opt p{font-size:.85rem; color:var(--muted);}
+  .back{display:inline-block; margin-top:28px; color:var(--muted); font-size:.85rem; text-decoration:none;}
+  .back:hover{color:var(--accent);}
+  @media(max-width:520px){.options{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Kim sifatida ro'yxatdan o'tasiz?</h1>
+  <p class="sub">Rolingizni tanlang — keyinroq o'zgartirib bo'lmaydi</p>
+  <div class="options">
+    <a class="opt" href="{% url 'student_signup' %}">
+      <div class="ic">🎓</div>
+      <h3>O'quvchi</h3>
+      <p>Diagnostika testini topshiring, darajangizni bilib oling</p>
+    </a>
+    <a class="opt" href="{% url 'center_signup' %}">
+      <div class="ic">🏫</div>
+      <h3>Markaz</h3>
+      <p>O'quvchilaringiz progressini kuzatib boring</p>
+    </a>
+  </div>
+  <a class="back" href="{% url 'login' %}">&larr; Kirish sahifasiga qaytish</a>
+</div>
+</body>
+</html>

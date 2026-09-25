@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ subject.name }} testi — TaraqqiyNET{% endblock %}
+{% block content %}
+<h1>{{ subject.name }} — diagnostika testi</h1>
+<p class="lead">{{ questions|length }} ta savol. Har biriga bitta javob tanlang va oxirida yuboring.</p>
+
+<form method="post" action="{% url 'submit_test' attempt.id %}">
+  {% csrf_token %}
+  {% for q in questions %}
+  <div class="question-block">
+    <p class="qtext">{{ forloop.counter }}. {{ q.text }}</p>
+    {% for choice in q.choices.all %}
+    <label class="choice-row">
+      <input type="radio" name="question_{{ q.id }}" value="{{ choice.id }}" required>
+      {{ choice.text }}
+    </label>
+    {% endfor %}
+  </div>
+  {% endfor %}
+  <button type="submit" class="btn">Testni yakunlash</button>
+</form>
+{% endblock %}
