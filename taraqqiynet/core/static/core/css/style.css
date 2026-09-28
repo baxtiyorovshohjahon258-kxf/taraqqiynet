@@ -44,3 +44,11 @@ th{background:#f0f2f9; color:var(--muted); font-weight:600; font-size:.8rem; tex
 .progress-bar-wrap{background:#e6e9f5; border-radius:20px; height:8px; overflow:hidden; margin:20px 0;}
 .progress-bar{background:var(--accent); height:100%;}
 .empty{color:var(--muted); font-size:.9rem; padding:20px 0;}
+.pw-wrap { position: relative; display: block; }
+.pw-wrap input { width: 100%; padding-right: 46px; box-sizing: border-box; }
+.pw-toggle {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  color: #9aa7c7; padding: 4px; display: flex; align-items: center;
+}
+.pw-toggle:hover { color: #3d7fff; }
